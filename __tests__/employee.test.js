@@ -1,5 +1,5 @@
 const Employee = require("../lib/employee");
-
+// test employee inputs
 test('create employee object', ()=>{
     const employee = new Employee('josh', 12345, 'emailtest@gmail.com')
     

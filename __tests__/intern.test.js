@@ -1,5 +1,5 @@
 const Intern = require("../lib/intern");
-
+// test intern inputs
 test('create intern object', ()=>{
     const intern = new Intern('josh', 12345, 'emailtest@gmail.com', 'UT')
     

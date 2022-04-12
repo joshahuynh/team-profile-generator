@@ -1,5 +1,5 @@
 const Manager = require("../lib/manager");
-
+// test manager inputs
 test('create manager object', ()=>{
     const manager = new Manager('josh', 12345, 'emailtest@gmail.com', 5129543103)
     

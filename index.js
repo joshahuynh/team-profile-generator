@@ -1,19 +1,23 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-
+// link js files to index
+const Employee = require("./lib/employee")
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 
 const employees = [];
 
+// initIndex function creates HTML and adds profiles to the HTML
 function initIndex() {
     createHTML();
     addProfile();
 }
 
+// questions to add to profile
 function addProfile() {
     inquirer.prompt([{
+        type: "input",
         message: "Enter a team member's name:",
         name: "name"
     },
@@ -24,17 +28,19 @@ function addProfile() {
             "Engineer",
             "Intern",
             "Manager"
-        ],
-        name: "role"
+        ]
     },
     {
+        type: "input",
         message: "Enter the team member's id:",
         name: "id"
     },
     {
+        type: "input",
         message: "Enter the team member's email address:",
         name: "email"
     }])
+    // specific questions by role
     .then(function({name, role, id, email}) {
         let roleInfo = "";
         if (role === "Engineer") {
@@ -66,6 +72,7 @@ function addProfile() {
             } else {
                 newMember = new Manager(name, id, email, roleInfo);
             }
+            // add more profiles or finish the HTML
             employees.push(newMember);
             addToHTML(newMember)
             .then(function() {
@@ -80,6 +87,7 @@ function addProfile() {
     });
 }
 
+// create html template
 function createHTML() {
     const html = `<!DOCTYPE html>
     <html lang="en">
@@ -96,6 +104,7 @@ function createHTML() {
         </nav>
         <div class="container">
             <div class="row">`;
+    // write "team-profile.html" to "dist" folder
     fs.writeFile("./dist/team-profile.html", html, function(err) {
         if (err) {
             console.log(err);
@@ -104,6 +113,7 @@ function createHTML() {
     console.log("Starting team profile generator!");
 }
 
+// add html for each member
 function addToHTML(member) {
     return new Promise(function(resolve, reject) {
         const name = member.getName();
@@ -155,15 +165,10 @@ function addToHTML(member) {
             };
             return resolve();
         });
-    });
-    
-            
-    
-        
-    
-    
+    }); 
 }
 
+// finishHtml() wraps up team-profile.html by changing constant "html" to empty
 function finishHtml() {
     const html = ` </div>
     </div>
@@ -176,7 +181,8 @@ function finishHtml() {
             console.log(err);
         };
     });
-    console.log("Generated team profile is located in 'dist'.");
+    console.log("Generated team profile is located in 'dist' folder.");
 }
 
+// initializes html and adds profiles
 initIndex();

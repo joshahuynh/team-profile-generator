@@ -1,5 +1,5 @@
 const Engineer = require("../lib/engineer");
-
+// test engineer inputs
 test('create engineer object', ()=>{
     const engineer = new Engineer('josh', 12345, 'emailtest@gmail.com', 'joshahuynh')
     
