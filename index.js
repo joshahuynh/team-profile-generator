@@ -125,9 +125,9 @@ function createHTML() {
             <title>Team Profile</title>
         </head>
         <body>
-            <nav class="navbar navbar-dark bg-dark mb-5">
-                <span class="navbar-brand mb-0 h1 w-100 text-center">Team Profile</span>
-            </nav>
+            <header class="header">
+                Team Profile
+            </header>
             <div class="container">
                 <div class="row">`;
     // write "team-profile.html" to "dist" folder
