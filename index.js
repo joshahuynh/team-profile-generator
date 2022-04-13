@@ -6,7 +6,7 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 
-const employees = [];
+
 
 // initIndex function creates HTML and adds profiles to the HTML
 function initIndex() {
@@ -98,7 +98,7 @@ function addProfile() {
                 newMember = new Manager(name, id, email, roleInfo);
             }
             // add more profiles or finish the HTML
-            employees.push(newMember);
+           
             addToHTML(newMember)
             .then(function() {
                 if (moreProfiles === "yes") {
@@ -116,19 +116,20 @@ function addProfile() {
 function createHTML() {
     const html = `<!DOCTYPE html>
     <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <title>Team Profile</title>
-    </head>
-    <body>
-        <nav class="navbar navbar-dark bg-dark mb-5">
-            <span class="navbar-brand mb-0 h1 w-100 text-center">Team Profile</span>
-        </nav>
-        <div class="container">
-            <div class="row">`;
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="style.css">
+            <title>Team Profile</title>
+        </head>
+        <body>
+            <nav class="navbar navbar-dark bg-dark mb-5">
+                <span class="navbar-brand mb-0 h1 w-100 text-center">Team Profile</span>
+            </nav>
+            <div class="container">
+                <div class="row">`;
     // write "team-profile.html" to "dist" folder
     fs.writeFile("./dist/team-profile.html", html, function(err) {
         if (err) {
@@ -148,40 +149,37 @@ function addToHTML(member) {
         let data = "";
         if (role === "Engineer") {
             const gitHub = member.getGithub();
-            data = `<div class="col-4">
-            <div class="card mx-auto mb-5" style="width: 275px">
-            <h5 class="card-header">${name}<br /><br />Engineer</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${id}</li>
-                <a class="list-group-item" href="mailto:${email}">Email Address: ${email}</a>
-                <a class="list-group-item">GitHub Username: ${gitHub}</a>
-            </ul>
-            </div>
-        </div>`;
+            data = `
+                    <div class="col-12 col-sm-6 col-md-4" id="card">
+                        <h5 class="card-header" id="card-header">${name}<br /><br />💻 Engineer</h5>
+                        <ul class="list-group list-group-flush" id="list">
+                            <li class="list-group-item">ID: ${id}</li>
+                            <li class="list-group-item">Email Address: <a href="mailto:${email}">${email}</a></li>
+                            <li class="list-group-item"> GitHub Username: <a href="https://github.com/${gitHub}">${gitHub}</a></li>
+                        </ul>
+                    </div>`;
         } else if (role === "Intern") {
             const school = member.getSchool();
-            data = `<div class="col-4">
-            <div class="card mx-auto mb-5" style="width: 275px">
-            <h5 class="card-header">${name}<br /><br />Intern</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${id}</li>
-                <a class="list-group-item" href="mailto:${email}">Email Address: ${email}</a>
-                <li class="list-group-item">School: ${school}</li>
-            </ul>
-            </div>
-        </div>`;
+            data = `
+                    <div class="col-12 col-sm-6 col-md-4" id="card">
+                        <h5 class="card-header" id="card-header">${name}<br /><br />📚 Intern</h5>
+                        <ul class="list-group list-group-flush" id="list">
+                            <li class="list-group-item">ID: ${id}</li>
+                            <li class="list-group-item">Email Address: <a href="mailto:${email}">${email}</a></li>
+                            <li class="list-group-item">School: ${school}</li>
+                        </ul>
+                    </div>`;
         } else {
             const phone = member.getOfficeNumber();
-            data = `<div class="col-4">
-            <div class="card mx-auto mb-5" style="width: 275px">
-            <h5 class="card-header">${name}<br /><br />Manager</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${id}</li>
-                <a class="list-group-item" href="mailto:${email}">Email Address: ${email}</a>
-                <a class="list-group-item" href="tel:${phone}">Office Phone: ${phone}</a>
-            </ul>
-            </div>
-        </div>`
+            data = `
+                    <div class="col-12 col-sm-6 col-md-4" id="card">
+                        <h5 class="card-header" id="card-header">${name}<br /><br />💼 Manager</h5>
+                        <ul class="list-group list-group-flush" id="list">
+                            <li class="list-group-item">ID: ${id}</li>
+                            <li class="list-group-item">Email Address: <a href="mailto:${email}">${email}</a></li>
+                            <li class="list-group-item">Office Phone: <a href="tel:${phone}">${phone}</a></li>
+                        </ul>
+                    </div>`
         }
         console.log("adding a team member...");
         fs.appendFile("./dist/team-profile.html", data, function (err) {
@@ -195,11 +193,12 @@ function addToHTML(member) {
 
 // finishHtml() wraps up team-profile.html by changing constant "html" to empty
 function finishHtml() {
-    const html = ` </div>
-    </div>
-    
-</body>
-</html>`;
+    const html = ` 
+                </div>
+            </div>
+            <footer class="footer">Created by joshahuynh on ${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}</footer>
+        </body>
+    </html>`;
 
     fs.appendFile("./dist/team-profile.html", html, function (err) {
         if (err) {
