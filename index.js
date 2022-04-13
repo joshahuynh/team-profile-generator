@@ -19,7 +19,15 @@ function addProfile() {
     inquirer.prompt([{
         type: "input",
         message: "Enter a team member's name:",
-        name: "name"
+        name: "name",
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log('Please enter a name!');
+                return false;
+            }
+        }
     },
     {
         type: "list",
@@ -34,12 +42,28 @@ function addProfile() {
     {
         type: "input",
         message: "Enter the team member's id:",
-        name: "id"
+        name: "id",
+        validate: idInput => {
+            if (idInput) {
+                return true;
+            } else {
+                console.log('Please enter an ID!');
+                return false;
+            }
+        }
     },
     {
         type: "input",
         message: "Enter the team member's email address:",
-        name: "email"
+        name: "email",
+        validate: emailInput => {
+            if (emailInput) {
+                return true;
+            } else {
+                console.log('Please enter an email!');
+                return false;
+            }
+        }
     }])
     // specific questions by role
     .then(function({name, role, id, email}) {
