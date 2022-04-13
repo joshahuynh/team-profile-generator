@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-// link js files to index
+// dependencies declaration
 const Employee = require("./lib/employee")
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
@@ -28,7 +28,8 @@ function addProfile() {
             "Engineer",
             "Intern",
             "Manager"
-        ]
+        ],
+        name:"role",
     },
     {
         type: "input",
@@ -128,8 +129,8 @@ function addToHTML(member) {
             <h5 class="card-header">${name}<br /><br />Engineer</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
-                <li class="list-group-item">Email Address: ${email}</li>
-                <li class="list-group-item">GitHub: ${gitHub}</li>
+                <a class="list-group-item" href="mailto:${email}">Email Address: ${email}</a>
+                <a class="list-group-item">GitHub Username: ${gitHub}</a>
             </ul>
             </div>
         </div>`;
@@ -140,7 +141,7 @@ function addToHTML(member) {
             <h5 class="card-header">${name}<br /><br />Intern</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
-                <li class="list-group-item">Email Address: ${email}</li>
+                <a class="list-group-item" href="mailto:${email}">Email Address: ${email}</a>
                 <li class="list-group-item">School: ${school}</li>
             </ul>
             </div>
@@ -152,8 +153,8 @@ function addToHTML(member) {
             <h5 class="card-header">${name}<br /><br />Manager</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
-                <li class="list-group-item">Email Address: ${email}</li>
-                <li class="list-group-item">Office Phone: ${phone}</li>
+                <a class="list-group-item" href="mailto:${email}">Email Address: ${email}</a>
+                <a class="list-group-item" href="tel:${phone}">Office Phone: ${phone}</a>
             </ul>
             </div>
         </div>`
