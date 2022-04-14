@@ -10,7 +10,7 @@ const Manager = require("./lib/manager");
 
 // initIndex function creates HTML and adds profiles to the HTML
 function initIndex() {
-    createHTML();
+    beginningHtml();
     addProfile();
 }
 
@@ -76,8 +76,17 @@ function addProfile() {
             roleInfo = "office phone number";
         }
         inquirer.prompt([{
+            type: 'input',
             message: `Enter the team member's ${roleInfo}:`,
-            name: "roleInfo"
+            name: "roleInfo",
+            validate: roleInput => {
+                if (roleInput) {
+                    return true;
+                } else {
+                    console.log(`Please enter a ${roleInfo}!`);
+                    return false;
+                }
+            } 
         },
         {
             type: "list",
@@ -104,7 +113,7 @@ function addProfile() {
                 if (moreProfiles === "yes") {
                     addProfile();
                 } else {
-                    finishHtml();
+                    closingHtml();
                 }
             });
             
@@ -113,7 +122,7 @@ function addProfile() {
 }
 
 // create html template
-function createHTML() {
+function beginningHtml() {
     const html = `<!DOCTYPE html>
     <html lang="en">
         <head>
@@ -191,8 +200,8 @@ function addToHTML(member) {
     }); 
 }
 
-// finishHtml() wraps up team-profile.html by changing constant "html" to empty
-function finishHtml() {
+// closingHtml() wraps up team-profile.html
+function closingHtml() {
     const html = ` 
                 </div>
             </div>
