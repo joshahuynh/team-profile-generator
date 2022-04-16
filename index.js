@@ -214,7 +214,7 @@ function closingHtml() {
             console.log(err);
         };
     });
-    console.log("Generated team profile is located in 'dist' folder.");
+    console.log("Generated team profile HTML is located in 'dist' folder.");
 }
 
 // initializes html and adds profiles
