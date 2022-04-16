@@ -13,7 +13,9 @@
   ## Usage:
   Run "node index.js" in the terminal and answer the following questions to generate your team profile!
   ## Demo:
-  https://watch.screencastify.com/v/xG8PLz9hbX8lOVi29kKR
+  https://watch.screencastify.com/v/TXjBpQXVQZRCQiv0QypV
+  ## Screenshot:
+  ![](./lib/assets/images/screenshot.png)
   ## Contact Me:
   - Github: [joshahuynh](https://github.com/joshahuynh)
   - Email: joshahuynh@gmail.com 
